@@ -8,6 +8,16 @@ class Question
     @answer_c = question_hash[:answer_c]
     @correct_answer = question_hash[:correct_answer]
   end
+
+  def winner
+    if @correct_answer[-1] == @answer_a[0]
+      @answer_a
+    elsif @correct_answer[-1] == @answer_b[0]
+      @answer_b
+    else
+      @answer_c
+    end
+  end
 end
 
 question_array = []
@@ -41,12 +51,13 @@ question_array.each do |question|
   if answer.upcase == question.correct_answer[-1]
     sleep 1
     puts "That is correct. The answer is "
-    response = / (?<=answer.upcase)(.+) /
-    p response
+    
+    puts question.winner
     sleep 1
   else
     sleep 1
     puts "That is incorrect. The answer is really:"
+    puts question.winner
     sleep 1
   end
   puts "========================================================="
